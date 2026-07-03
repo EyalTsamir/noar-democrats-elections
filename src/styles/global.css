@@ -1,0 +1,151 @@
+/* ============================================================
+   סגנונות בסיס גלובליים — איפוס, טיפוגרפיה, נגישות, RTL
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  /* שמירת מקום קבוע לפס הגלילה — מונעת קפיצת פריסה
+     כשגלילת הרקע ננעלת בזמן שתפריט הצד פתוח */
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* נעילת גלילת הרקע כשתפריט הצד (dialog) פתוח */
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+#root {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+img,
+svg {
+  display: block;
+  max-inline-size: 100%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: var(--lh-heading);
+  font-weight: var(--fw-bold);
+  overflow-wrap: break-word;
+}
+
+p {
+  overflow-wrap: break-word;
+}
+
+/* רשימות שקיבלו class הן רשימות עיצוביות — בלי נקודות וריווח ברירת מחדל */
+ul[class] {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  color: var(--color-primary);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* ---------- מצב פוקוס נראה ואחיד ---------- */
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* יעד קישור הדילוג — פוקוס תכנותי בלבד, בלי מסגרת */
+main:focus {
+  outline: none;
+}
+
+/* ---------- קישור דילוג לתוכן הראשי ---------- */
+.skip-link {
+  position: fixed;
+  z-index: 1000;
+  inset-block-start: var(--space-3);
+  inset-inline-start: 50%;
+  /* מוסתר מעל קצה המסך עד שהוא מקבל פוקוס מקלדת */
+  transform: translate(50%, calc(-100% - var(--space-3) - 12px));
+  background: var(--color-primary-darker);
+  color: #ffffff;
+  font-weight: var(--fw-bold);
+  text-decoration: none;
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translate(50%, 0);
+}
+
+/* ---------- כותרת עם פס מבטא — מהדהד את הפסים שבלוגו ---------- */
+.accent-heading::after {
+  content: '';
+  display: block;
+  inline-size: 2.75rem;
+  block-size: 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  margin-block-start: var(--space-2);
+}
+
+/* ---------- תוכן לקוראי מסך בלבד ---------- */
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- העדפת תנועה מופחתת: ביטול גורף של אנימציות ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

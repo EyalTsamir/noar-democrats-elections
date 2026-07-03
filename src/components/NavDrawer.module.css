@@ -1,0 +1,212 @@
+/* ============================================================
+   מגירת הניווט — dialog מקורי שנצמד לצד ימין (inline-start בעברית)
+   ============================================================ */
+
+.drawer {
+  position: fixed;
+  inset: 0;
+  /* margin אוטומטי רק בצד השמאלי מצמיד את המגירה לימין */
+  margin: 0;
+  margin-inline-end: auto;
+  inline-size: var(--drawer-w);
+  block-size: 100dvh;
+  max-inline-size: none;
+  max-block-size: none;
+  border: none;
+  padding: 0;
+  background: var(--color-bg);
+  box-shadow: var(--shadow-drawer);
+  /* הטרנספורם פיזי בכוונה: האתר תמיד RTL, והמגירה תמיד בצד ימין,
+     ולכן translateX(100%)‎ = החוצה מהמסך ימינה */
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    display var(--duration-base) allow-discrete,
+    overlay var(--duration-base) allow-discrete;
+}
+
+.drawer:not([open]) {
+  transform: translateX(100%);
+}
+
+.drawer[open] {
+  transform: none;
+}
+
+/* נקודת הפתיחה של אנימציית הכניסה (דפדפנים ללא תמיכה: פתיחה מיידית) */
+@starting-style {
+  .drawer[open] {
+    transform: translateX(100%);
+  }
+}
+
+.drawer::backdrop {
+  background: var(--color-backdrop);
+  opacity: 1;
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    display var(--duration-base) allow-discrete,
+    overlay var(--duration-base) allow-discrete;
+}
+
+.drawer:not([open])::backdrop {
+  opacity: 0;
+}
+
+@starting-style {
+  .drawer[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .drawer::backdrop {
+    transition: none;
+  }
+}
+
+/* ---------- תוכן המגירה ---------- */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow-y: auto;
+  /* עוצר שרשור גלילה אל הרקע הנעול */
+  overscroll-behavior: contain;
+  padding: var(--space-3);
+}
+
+.drawerTop {
+  display: flex;
+  justify-content: flex-end;
+  padding-block-end: var(--space-2);
+}
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 44px;
+  block-size: 44px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+
+.closeButton:hover {
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+}
+
+.navList {
+  display: grid;
+  gap: 2px;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  inline-size: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-medium);
+  text-align: start;
+  text-decoration: none;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+
+.navLink:hover {
+  background: var(--color-bg-alt);
+}
+
+/* העמוד הנוכחי — NavLink מוסיף aria-current="page" אוטומטית */
+.navLinkActive {
+  background: var(--color-primary-tint);
+  color: var(--color-primary);
+  font-weight: var(--fw-bold);
+}
+
+.chevron {
+  flex-shrink: 0;
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* ---------- תת-תפריט המועמדים ---------- */
+
+.submenu {
+  display: grid;
+  gap: 2px;
+  margin-inline-start: var(--space-4);
+  margin-block: var(--space-1);
+  padding-inline-start: var(--space-3);
+  border-inline-start: 2px solid var(--color-primary-border);
+}
+
+.subLink {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+
+.subLink:hover {
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+}
+
+.subLinkActive {
+  background: var(--color-primary-tint);
+  color: var(--color-primary);
+  font-weight: var(--fw-bold);
+}
+
+/* מצב ריק שקט — עוד אין מועמדים ומועמדות */
+.submenuEmpty {
+  margin-inline-start: var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+}
+
+/* ---------- תחתית המגירה ---------- */
+
+.drawerFooter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-block-start: auto;
+  padding: var(--space-4) var(--space-4) var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+}
+
+/* נקודת המבטא האדומה — פרט קטן ומאופק */
+.drawerFooter::before {
+  content: '';
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+}

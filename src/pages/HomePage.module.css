@@ -1,0 +1,188 @@
+/* ---------- אזור הפתיחה (Hero) ---------- */
+
+.hero {
+  background: linear-gradient(180deg, var(--color-primary-tint) 0%, var(--color-bg) 100%);
+  /* קו תחתון אלכסוני עדין — אנרגיה בלי רעש */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 1.25rem));
+  padding: var(--space-7) var(--page-pad) var(--space-8);
+  text-align: center;
+}
+
+/* מצב יום ההצבעה — גוון הדגשה אדום כדי לסמן בבירור "היום!" */
+.hero[data-phase='voting-open'] {
+  background: linear-gradient(180deg, var(--color-accent-tint) 0%, var(--color-bg) 100%);
+}
+
+.heroInner {
+  max-inline-size: var(--content-max);
+  margin-inline: auto;
+  /* רצפת גובה — מצמצמת קפיצות פריסה כשתוכן ה-Hero מתחלף בין שלבים */
+  min-block-size: 18rem;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+}
+
+.logo {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-block-start: var(--space-5);
+  padding: var(--space-1) var(--space-4);
+  background: var(--color-bg);
+  border: 1px solid var(--color-primary-border);
+  border-radius: var(--radius-full);
+  color: var(--color-primary-darker);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+}
+
+/* נקודת המבטא האדומה — שימוש מדוד בצבע ההדגשה */
+.kicker::before {
+  content: '';
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+}
+
+.title {
+  margin-block-start: var(--space-4);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-black);
+  color: var(--color-primary);
+  text-wrap: balance;
+}
+
+.intro {
+  margin-block-start: var(--space-3);
+  max-inline-size: 32rem;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-md);
+  text-wrap: pretty;
+}
+
+/* כותרת יום ההצבעה — בולטת בצבע ההדגשה */
+.titleVoting {
+  margin-block-start: var(--space-4);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-black);
+  color: var(--color-accent);
+  text-wrap: balance;
+}
+
+/* שורת הסבר מעל הספירה לאחור */
+.countdownLead {
+  margin-block-start: var(--space-4);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-medium);
+}
+
+.countdownWrap {
+  margin-block-start: var(--space-5);
+  inline-size: 100%;
+}
+
+/* שעת סגירת ההצבעה במצב יום הבחירות */
+.closingTime {
+  margin-block-start: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-md);
+}
+
+/* טקסט חלופי כשעדיין אין קישור הצבעה */
+.votingPending {
+  max-inline-size: 28rem;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-md);
+  text-wrap: pretty;
+}
+
+/* הערת מסך סיום ההצבעה */
+.closedNote {
+  margin-block-start: var(--space-3);
+  max-inline-size: 32rem;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-md);
+  text-wrap: pretty;
+}
+
+.cta {
+  margin-block-start: var(--space-6);
+  inline-size: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* חשיפה מדורגת ועדינה בטעינת העמוד — רק כשאין העדפת תנועה מופחתת */
+@media (prefers-reduced-motion: no-preference) {
+  .logo,
+  .kicker,
+  .title,
+  .titleVoting,
+  .intro,
+  .countdownLead,
+  .countdownWrap,
+  .closingTime,
+  .closedNote,
+  .cta {
+    animation: rise var(--duration-slow) var(--ease-out) backwards;
+  }
+
+  .kicker { animation-delay: 60ms; }
+  .title,
+  .titleVoting { animation-delay: 120ms; }
+  .intro,
+  .countdownLead { animation-delay: 180ms; }
+  .countdownWrap { animation-delay: 220ms; }
+  .cta { animation-delay: 240ms; }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+/* ---------- מקטע המועמדים ---------- */
+
+.candidates {
+  padding: var(--space-6) var(--page-pad) var(--space-8);
+}
+
+.candidatesInner {
+  max-inline-size: var(--wide-max);
+  margin-inline: auto;
+}
+
+.sectionTitle {
+  font-size: var(--fs-xl);
+}
+
+.grid {
+  display: grid;
+  /* שתי עמודות בטלפון צר, מתרחב אוטומטית במסכים גדולים */
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: var(--space-4);
+}
+
+/* במסכים רחבים — עמודות ברוחב מוגבל וממורכזות, כך שגם מועמד/ת
+   בודד/ת וגם רשימה ארוכה שנשברת לשורות נראים מאוזנים */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 13rem));
+    justify-content: center;
+  }
+}
+
+/* אוויר בין כותרת המקטע לתוכן שאחריה (רשת או מצב ריק) */
+.candidatesInner > * + * {
+  margin-block-start: var(--space-5);
+}

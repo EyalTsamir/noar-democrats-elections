@@ -1,0 +1,61 @@
+.header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 10;
+  background: var(--color-bg);
+  border-block-end: 1px solid var(--color-border);
+}
+
+/* פס מותג דק בקצה העליון של האתר */
+.header::before {
+  content: '';
+  display: block;
+  block-size: 3px;
+  background: var(--color-primary);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  block-size: var(--header-h);
+  max-inline-size: var(--wide-max);
+  margin-inline: auto;
+  padding-inline: var(--space-2) var(--space-4);
+}
+
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 44px; /* יעד מגע */
+  block-size: 44px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+
+.menuButton:hover {
+  background: var(--color-primary-tint);
+  color: var(--color-primary);
+}
+
+.homeLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-md);
+  padding: var(--space-1);
+  border-radius: var(--radius-sm);
+}
+
+.logo {
+  border-radius: var(--radius-sm);
+}

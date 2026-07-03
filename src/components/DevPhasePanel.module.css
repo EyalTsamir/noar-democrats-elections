@@ -1,0 +1,52 @@
+/* מראה כהה ומובחן בכוונה — ברור שזה כלי פיתוח ולא חלק מהאתר */
+.panel {
+  position: fixed;
+  inset-block-end: var(--space-3);
+  inset-inline-start: var(--space-3);
+  z-index: 9999;
+  max-inline-size: min(92vw, 22rem);
+  padding: var(--space-3);
+  background: #101322;
+  color: #f6f7fc;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-drawer);
+  font-size: var(--fs-sm);
+  opacity: 0.94;
+}
+
+.title {
+  margin-block-end: var(--space-2);
+  font-weight: var(--fw-bold);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.rowLabel {
+  color: #c9cdf7;
+}
+
+.links {
+  display: inline-flex;
+  gap: var(--space-2);
+}
+
+.links a,
+.live {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.live {
+  display: inline-block;
+  margin-block-start: var(--space-2);
+}
