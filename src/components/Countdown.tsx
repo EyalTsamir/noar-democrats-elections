@@ -42,7 +42,9 @@ export function Countdown({ parts, label }: CountdownProps) {
 
   return (
     <div className={styles.countdown} role="timer" aria-label={ariaLabel}>
-      <div className={styles.units} aria-hidden="true">
+      {/* שעון הוא רצף מספרי — נקרא כמו שעון דיגיטלי משמאל לימין:
+          ימים בקצה השמאלי והשניות "רצות" בקצה הימני, גם בעמוד עברי */}
+      <div className={styles.units} dir="ltr" aria-hidden="true">
         {units.map((unit) => (
           <div key={unit.plural} className={styles.unit}>
             <span dir="ltr" className={styles.value}>
