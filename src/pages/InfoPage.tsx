@@ -36,9 +36,11 @@ export function InfoPage() {
                 <ul className={styles.events}>
                   {section.events.map((event) => (
                     <li key={event.title} className={styles.event}>
-                      {/* dir="ltr" שומר על כיוון קריאה נכון של תאריך ושעות בתוך שורה עברית */}
+                      {/* dir="ltr" שומר על כיוון קריאה נכון של תאריך ושעות בתוך שורה עברית.
+                          התאריך והשעה מופרדים לשני אלמנטים כדי שיהיו ניתנים להבחנה חזותית */}
                       <span dir="ltr" className={styles.eventWhen}>
-                        {event.date}, {event.time}
+                        <span className={styles.eventDate}>{event.date}</span>
+                        <span className={styles.eventTime}>{event.time}</span>
                       </span>
                       <span className={styles.eventTitle}>{event.title}</span>
                     </li>

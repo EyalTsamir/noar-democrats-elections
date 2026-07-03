@@ -71,16 +71,29 @@
   border: 3px solid var(--color-bg);
 }
 
-/* התאריך והשעה — טיפוגרפיית תצוגה גדולה, הם הכוכבים של העמוד */
+/* התאריך והשעה — נקראים כשני פרטים נפרדים: התאריך הוא הכוכב (גדול, כחול),
+   השעה משנית לצידו (קטנה יותר, בדיו האדום) כדי שלא יתמזגו לגוש אחד */
 .eventWhen {
-  font-family: var(--font-display);
-  font-size: var(--fs-xl);
-  line-height: 1.1;
-  color: var(--color-primary-dark);
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
   /* ספרות ברוחב אחיד — התאריכים מיושרים יפה זה מתחת לזה */
   font-variant-numeric: tabular-nums;
+  font-family: var(--font-display);
+  line-height: 1.1;
   /* הצמדה לתחילת ציר הרשת (ימין) — למרות שהתוכן עצמו dir="ltr" */
   justify-self: start;
+}
+
+.eventDate {
+  font-size: var(--fs-xl);
+  color: var(--color-primary-dark);
+}
+
+.eventTime {
+  font-size: var(--fs-md);
+  color: var(--color-accent-deep);
 }
 
 .eventTitle {
