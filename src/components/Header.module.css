@@ -17,13 +17,15 @@
 }
 
 .inner {
-  display: flex;
+  display: grid;
+  /* עמודות סימטריות: כפתור התפריט מול עמודה ריקה ברוחב זהה —
+     כך הלוגו יושב במרכז אמיתי של הסרגל, כמו כותרת של כרזה */
+  grid-template-columns: 44px 1fr 44px;
   align-items: center;
-  gap: var(--space-2);
   block-size: var(--header-h);
   max-inline-size: var(--wide-max);
   margin-inline: auto;
-  padding-inline: var(--space-2) var(--space-4);
+  padding-inline: var(--space-2);
 }
 
 .menuButton {
@@ -45,22 +47,42 @@
   background: var(--color-ink-soft);
 }
 
+/* הלוגו כטיפוגרפיה חיה — השם בין שני פסים, נאמן ללוגו המקורי
+   וחד בכל גודל מסך (בניגוד לתמונה מוקטנת שהופכת לכתם) */
 .homeLink {
+  justify-self: center;
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  gap: var(--space-3);
+  gap: 4px;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
   color: var(--color-on-ink);
   text-decoration: none;
   font-family: var(--font-display);
   font-weight: var(--fw-regular);
-  font-size: var(--fs-md);
-  padding: var(--space-1);
-  border-radius: var(--radius-sm);
+  /* מתכווץ מעט במסכים צרים — שהשם לעולם לא יישבר לשתי שורות */
+  font-size: clamp(1.15rem, 0.95rem + 1vw, 1.375rem);
+  line-height: 1.15;
+  white-space: nowrap;
 }
 
-.logo {
-  border-radius: var(--radius-sm);
-  /* קו לבן דק — מפריד את ריבוע הלוגו הכחול מפס הדיו */
-  outline: 1.5px solid rgb(255 255 255 / 0.85);
-  outline-offset: 0;
+/* שני פסי הלוגו — חורגים מעט מרוחב הטקסט, כמו במקור */
+.homeLink::before,
+.homeLink::after {
+  content: '';
+  align-self: stretch;
+  margin-inline: -8px;
+  block-size: 3px;
+  background: currentColor;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+/* בריחוף ובפוקוס הפס התחתון נדלק באדום — הדהוד פסי הפוטר והכותרות */
+.homeLink:hover::after,
+.homeLink:focus-visible::after {
+  background: var(--color-accent);
+  transform: scaleX(1.06);
 }

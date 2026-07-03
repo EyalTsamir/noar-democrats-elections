@@ -117,8 +117,8 @@ export function isValidVotingUrl(url: string): boolean {
 }
 
 /**
- * ממיר מחרוזת ISO (מפרמטר ?now= בפיתוח) לרגע בשעון ישראל.
- * מחזיר null אם ריק או לא תקין. משמש רק את מנגנון סימולציית הזמן בפיתוח.
+ * ממיר מחרוזת ISO (מפרמטר ?now=) לרגע בשעון ישראל.
+ * מחזיר null אם ריק או לא תקין. משמש את מנגנון סימולציית הזמן (זמין גם בייצור).
  */
 export function parseSimulatedClock(param: string | null, config: ElectionConfig): DateTime | null {
   if (!param) return null

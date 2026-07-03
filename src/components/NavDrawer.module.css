@@ -86,8 +86,21 @@
 
 .drawerTop {
   display: flex;
-  justify-content: flex-end;
+  align-items: flex-start;
+  justify-content: space-between;
   padding-block-end: var(--space-4);
+}
+
+/* הלוגו הרשמי כמדבקה על הפוסטר — הטיה קלה, צל ופינה מעוגלת.
+   כאן, בניגוד לסרגל הצפוף, יש לו מקום לנשום */
+.drawerLogo {
+  inline-size: 84px;
+  block-size: 84px;
+  margin-block-start: var(--space-2);
+  margin-inline-start: var(--space-2);
+  border-radius: var(--radius-md);
+  rotate: var(--tilt);
+  box-shadow: var(--shadow-poster);
 }
 
 .closeButton {

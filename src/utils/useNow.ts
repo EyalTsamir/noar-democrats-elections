@@ -17,17 +17,13 @@ const TICK_MS = 1000
  * בכל טיק מחושב הזמן המוחלט מחדש (base + זמן אמת שחלף) ולא מונה יורד,
  * כדי שהספירה תישאר מדויקת גם אחרי השהיית לשונית, שינה, או עיכוב הטיימר.
  *
- * פיתוח בלבד: פרמטר ?now=<ISO> בכתובת מדמה רגע אחר (בשעון ישראל) ו"רץ" קדימה.
- * הענף כולו מסולק מגרסת הייצור כי import.meta.env.DEV הופך שם ל-false.
+ * פרמטר ?now=<ISO> בכתובת מדמה רגע אחר (בשעון ישראל) ו"רץ" קדימה משם.
+ * זמין גם בייצור (לא רק בפיתוח) — ההשפעה מקומית לדפדפן שמוסיף את הפרמטר בלבד,
+ * ולוח הקיצורים אליו (DevPhasePanel) מוסתר כברירת מחדל ונחשף רק כאיסטר-אג.
  */
 export function useNow(): DateTime {
   const [searchParams] = useSearchParams()
-
-  // override של זמן — פיתוח בלבד; בייצור נשאר null והקוד סביבו מסולק בבנייה
-  let overrideIso: string | null = null
-  if (import.meta.env.DEV) {
-    overrideIso = searchParams.get('now')
-  }
+  const overrideIso = searchParams.get('now')
 
   const [now, setNow] = useState<DateTime>(() => resolveBase(overrideIso))
 
@@ -47,9 +43,9 @@ export function useNow(): DateTime {
   return now
 }
 
-// נקודת הבסיס לשעון: זמן מדומה (בפיתוח) או הזמן האמיתי
+// נקודת הבסיס לשעון: זמן מדומה (אם סופק ?now=) או הזמן האמיתי
 function resolveBase(overrideIso: string | null): DateTime {
-  if (import.meta.env.DEV && overrideIso) {
+  if (overrideIso) {
     const simulated = parseSimulatedClock(overrideIso, electionConfig)
     if (simulated) return simulated
   }

@@ -1,13 +1,14 @@
 import { DateTime } from 'luxon'
 import { Link } from 'react-router'
 import { electionConfig } from '../content/electionConfig'
+import { useDevPanel } from '../utils/useDevPanel'
 import styles from './DevPhasePanel.module.css'
 
 /**
- * לוח בקרה לסימולציית זמן — פיתוח בלבד.
- * מוצג רק כאשר import.meta.env.DEV אמת, ולכן מסולק כליל מגרסת הייצור.
- * הקישורים קובעים ?now=<ISO בשעון ישראל> ומאפשרים לבדוק כל גבול לפני/בדיוק/אחרי.
- * זו אינה בקרה ציבורית לשינוי שלב — היא לא קיימת באתר שמתפרסם.
+ * לוח בקרה לסימולציית זמן — קיים גם בייצור, אך מוסתר כברירת מחדל.
+ * נחשף רק כאיסטר-אג (3 לחיצות על חתימת התחתית במגירת הניווט, ראו DevPanelProvider),
+ * ולכן אינה בקרה גלויה לציבור. הקישורים קובעים ?now=<ISO בשעון ישראל>
+ * ומאפשרים לבדוק כל גבול לפני/בדיוק/אחרי; ההשפעה מקומית לדפדפן הלוחץ בלבד.
  */
 
 interface BoundaryLink {
@@ -32,9 +33,12 @@ function boundaryIso(date: string, time: string, deltaSeconds: number): string {
 }
 
 export function DevPhasePanel() {
+  const { isRevealed } = useDevPanel()
+  if (!isRevealed) return null
+
   return (
-    <aside className={styles.panel} aria-label="סימולציית זמן (פיתוח)">
-      <p className={styles.title}>סימולציית זמן · פיתוח</p>
+    <aside className={styles.panel} aria-label="סימולציית זמן">
+      <p className={styles.title}>סימולציית זמן</p>
       <ul className={styles.list}>
         {BOUNDARIES.map((boundary) => (
           <li key={boundary.label} className={styles.row}>

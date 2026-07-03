@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router'
 import { CandidateOrderProvider } from './components/CandidateOrderProvider'
+import { DevPanelProvider } from './components/DevPanelProvider'
 import { DevPhasePanel } from './components/DevPhasePanel'
 import { Layout } from './components/Layout'
 import { ScrollToTop } from './components/ScrollToTop'
@@ -11,7 +12,7 @@ import { NotFoundPage } from './pages/NotFoundPage'
 
 export default function App() {
   return (
-    <>
+    <DevPanelProvider>
       <ScrollToTop />
       <CandidateOrderProvider>
         <Layout>
@@ -24,8 +25,8 @@ export default function App() {
           </Routes>
         </Layout>
       </CandidateOrderProvider>
-      {/* בקרת סימולציית זמן — פיתוח בלבד; מסולקת אוטומטית מגרסת הייצור */}
-      {import.meta.env.DEV && <DevPhasePanel />}
-    </>
+      {/* בקרת סימולציית זמן — מוסתרת כברירת מחדל, נחשפת רק כאיסטר-אג */}
+      <DevPhasePanel />
+    </DevPanelProvider>
   )
 }

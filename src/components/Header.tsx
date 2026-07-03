@@ -1,6 +1,5 @@
 import { useCallback, useRef, useState } from 'react'
 import { Link } from 'react-router'
-import logoUrl from '../assets/logo-noar.jpg'
 import { electionConfig } from '../content/electionConfig'
 import { IconMenu } from './icons'
 import { NavDrawer } from './NavDrawer'
@@ -29,10 +28,11 @@ export function Header() {
           <IconMenu />
         </button>
 
+        {/* הלוגו של התנועה משוחזר כאן כטיפוגרפיה חיה — השם בין שני פסים
+            (ה-::before/::after ב-CSS), במקום תמונה זעירה שלא ניתן לקרוא.
+            הטקסט עצמו הוא השם הנגיש של הקישור */}
         <Link to="/" className={styles.homeLink}>
-          {/* alt ריק — שם האתר שלצד הלוגו הוא הטקסט הנגיש של הקישור */}
-          <img src={logoUrl} alt="" width={28} height={28} className={styles.logo} />
-          <span>{electionConfig.siteShortTitle}</span>
+          {electionConfig.siteShortTitle}
         </Link>
       </div>
 

@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import type { MouseEvent as ReactMouseEvent, RefObject } from 'react'
 import { NavLink, useLocation } from 'react-router'
+import logoUrl from '../assets/logo-noar.jpg'
 import { useCandidateOrder } from '../utils/useCandidateOrder'
+import { useDevPanel } from '../utils/useDevPanel'
 import { IconChevronDown, IconClose } from './icons'
 import styles from './NavDrawer.module.css'
 
@@ -29,6 +31,7 @@ export function NavDrawer({ isOpen, onClose, triggerRef }: NavDrawerProps) {
   const { pathname } = useLocation()
   // סדר אקראי משותף — זהה לסדר הכרטיסים בעמוד הבית באותו ניווט
   const candidates = useCandidateOrder()
+  const { registerFooterClick } = useDevPanel()
 
   // פתיחה/סגירה של ה-dialog בהתאם למצב שמנוהל ב-Header
   useEffect(() => {
@@ -71,7 +74,11 @@ export function NavDrawer({ isOpen, onClose, triggerRef }: NavDrawerProps) {
     >
       <div className={styles.content}>
         <div className={styles.drawerTop}>
-          {/* האלמנט הראשון בתוך ה-dialog — הפוקוס נוחת עליו בפתיחה */}
+          {/* הלוגו הרשמי של התנועה — מודבק כאן כמו מדבקת פוסטר,
+              בגודל שבו הכיתוב שבתוכו באמת קריא. alt ריק: דקורטיבי,
+              השם מופיע כטקסט בסרגל העליון */}
+          <img src={logoUrl} alt="" width={84} height={84} className={styles.drawerLogo} />
+          {/* האלמנט הראשון שניתן למקד בתוך ה-dialog — הפוקוס נוחת עליו בפתיחה */}
           <button
             type="button"
             className={styles.closeButton}
@@ -145,7 +152,10 @@ export function NavDrawer({ isOpen, onClose, triggerRef }: NavDrawerProps) {
           </ul>
         </nav>
 
-        <p className={styles.drawerFooter}>מערכת הבחירות 2026</p>
+        {/* 3 לחיצות רצופות חושפות איסטר-אג — לוח סימולציית זמן, ראו DevPanelProvider */}
+        <p className={styles.drawerFooter} onClick={registerFooterClick}>
+          מערכת הבחירות 2026
+        </p>
       </div>
     </dialog>
   )

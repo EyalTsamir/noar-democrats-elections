@@ -68,4 +68,25 @@ export const candidates: Candidate[] = [
       url: 'https://www.facebook.com/ShimonPeresInt/?locale=he_IL',
     },
   },
+  {
+    id: 'yitzhak-rabin',
+    slug: 'yitzhak-rabin',
+    fullName: 'יצחק רבין',
+    image: 'yitzhak-rabin.webp',
+    imageAlt: 'יצחק רבין בחליפה כהה ועניבה, על רקע ספרייה',
+    mainStatement: 'אלימות היא כרסום יסוד הדמוקרטיה הישראלית',
+    personalText: [
+      'יצחק רבין היה פוליטיקאי ואיש צבא ישראלי שכיהן כרמטכ"ל השביעי של צה"ל, כראש ממשלת ישראל החמישי של ממשלת ישראל השבע עשרה והעשרים וחמש וכשר הביטחון העשירי. חתן פרס נובל לשלום.',
+    ],
+    proposedSecretariat: [
+      { name: 'שמעון פרס', role: 'סגן' },
+      { name: 'שמעון שבס', role: 'יועץ חוקתי' },
+      { name: 'אורי סביר', role: 'דובר' },
+      { name: 'יגאל אלון', role: 'רכז שטח' },
+    ],
+    socialLink: {
+      label: 'הרשת החברתית של יצחק רבין',
+      url: 'https://www.facebook.com/rabincenter/mentions/',
+    },
+  },
 ]
