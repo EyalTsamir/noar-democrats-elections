@@ -1,13 +1,7 @@
 import type { DateTime } from 'luxon'
-// צילומי הפעילות מעובדים מראש לגווני אפור; הצבע נמזג בזמן ריצה (דואוטון כחול)
-import circlePhoto from '../assets/activities/activity-circle-1200.webp'
-import circlePhotoSm from '../assets/activities/activity-circle-700.webp'
+// צילום הפעילות מעובד מראש לגווני אפור; הצבע נמזג בזמן ריצה (דואוטון כחול)
 import firePhoto from '../assets/activities/activity-fire-1600.webp'
 import firePhotoSm from '../assets/activities/activity-fire-800.webp'
-import groupPhoto from '../assets/activities/activity-group-1200.webp'
-import groupPhotoSm from '../assets/activities/activity-group-700.webp'
-import meetingPhoto from '../assets/activities/activity-meeting-1600.webp'
-import meetingPhotoSm from '../assets/activities/activity-meeting-800.webp'
 import { CandidateCard } from '../components/CandidateCard'
 import { Countdown } from '../components/Countdown'
 import { EmptyState } from '../components/EmptyState'
@@ -21,28 +15,6 @@ import { useCandidateOrder } from '../utils/useCandidateOrder'
 import { useDocumentTitle } from '../utils/useDocumentTitle'
 import { useElectionPhase } from '../utils/useNow'
 import styles from './HomePage.module.css'
-
-/** צילומי "התנועה בשטח" — התיאור (alt) נקרא בקורא מסך, הכיתוב מוצג מתחת */
-const fieldPrints = [
-  {
-    src: groupPhoto,
-    srcSm: groupPhotoSm,
-    alt: 'חברי וחברות התנועה בתמונה קבוצתית על הדשא, שמיים מעוננים ברקע',
-    caption: 'ביחד, בשטח',
-  },
-  {
-    src: circlePhoto,
-    srcSm: circlePhotoSm,
-    alt: 'מעגל שיח של חברי התנועה, יושבים על רצפת כיכר בשעות הערב',
-    caption: 'מדברים על הכול',
-  },
-  {
-    src: meetingPhoto,
-    srcSm: meetingPhotoSm,
-    alt: 'מפגש של חברי התנועה סביב שולחנות עץ בחדר פעילות',
-    caption: 'לומדים, מתווכחים, מחליטים',
-  },
-]
 
 export function HomePage() {
   useDocumentTitle()
@@ -95,35 +67,6 @@ export function HomePage() {
               note="שווה לחזור ולהתעדכן!"
             />
           )}
-        </div>
-      </section>
-
-      <section className={`${styles.field} ink`} aria-labelledby="field-heading">
-        <div className={styles.fieldInner}>
-          <h2 id="field-heading" className={`accent-heading ${styles.fieldTitle}`}>
-            התנועה בשטח
-          </h2>
-          <p className={styles.fieldLead}>
-            ככה זה נראה כשנוער עושה פוליטיקה — מפגשים, מעגלי שיח והרבה עבודת שטח.
-          </p>
-          <ul className={styles.strip}>
-            {fieldPrints.map((print) => (
-              <li key={print.caption}>
-                <figure className={styles.print}>
-                  <span className={styles.printMedia}>
-                    <img
-                      src={print.src}
-                      srcSet={`${print.srcSm} 700w, ${print.src} 1400w`}
-                      sizes="(min-width: 768px) 30vw, 78vw"
-                      alt={print.alt}
-                      loading="lazy"
-                    />
-                  </span>
-                  <figcaption className={styles.printCaption}>{print.caption}</figcaption>
-                </figure>
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
     </>
