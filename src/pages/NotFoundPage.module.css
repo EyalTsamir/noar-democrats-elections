@@ -8,18 +8,26 @@
   text-align: center;
 }
 
-/* ספרות ענק בגוון רקע — סימן היכר שקט, לא צעקני */
+/* ספרות ענק במתאר כחול — כרזה גם כשמתפספסים */
 .code {
-  font-size: clamp(4.5rem, 22vw, 7rem);
-  font-weight: var(--fw-black);
+  font-family: var(--font-display);
+  font-size: clamp(5.5rem, 26vw, 9rem);
   line-height: 1;
-  color: var(--color-primary-tint);
+  color: transparent;
+  -webkit-text-stroke: 3px var(--color-primary);
   letter-spacing: 0.02em; /* ספרות בלבד — לא טקסט עברי */
+  rotate: var(--tilt);
+}
+
+/* דפדפן בלי תמיכה במתאר טקסט — מילוי בגוון רקע כחול */
+@supports not (-webkit-text-stroke: 1px #ffffff) {
+  .code {
+    color: var(--color-primary-tint);
+  }
 }
 
 .title {
   font-size: var(--fs-xl);
-  font-weight: var(--fw-black);
 }
 
 .text {

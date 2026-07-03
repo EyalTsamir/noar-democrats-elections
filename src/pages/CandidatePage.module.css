@@ -1,58 +1,76 @@
+/* העמוד האישי — כותרת בסגנון כרזת קמפיין, גוף טקסט עיתונאי */
+
+/* ---------- כותרת העמוד: לוח דיו עם תמונה "מודבקת" ---------- */
+
+.header {
+  background: var(--color-ink);
+  background-image: var(--noise);
+  background-size: 140px;
+  color: var(--color-on-ink);
+  text-align: center;
+  padding: var(--space-7) var(--page-pad) calc(var(--space-7) + var(--cut));
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--cut)), 0 100%);
+}
+
+.headerInner {
+  max-inline-size: var(--content-max);
+  margin-inline: auto;
+  display: grid;
+  justify-items: center;
+}
+
+/* התמונה בצבע מלא — מסגרת נייר לבנה עבה, מוטה מעט, כמו כרזה שהודבקה */
+.image {
+  inline-size: min(58vw, 13rem);
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 6px solid var(--color-surface);
+  border-radius: 2px;
+  rotate: var(--tilt);
+  box-shadow: var(--shadow-poster);
+  background: var(--color-primary-tint);
+}
+
+.name {
+  margin-block-start: var(--space-6);
+  font-size: var(--fs-2xl);
+}
+
+/* הפס הכפול של הלוגו — ממורכז מתחת לשם: לבן ארוך, אדום קצר */
+.name::after {
+  content: '';
+  display: block;
+  inline-size: 3.5rem;
+  block-size: 11px;
+  margin: var(--space-3) auto 0;
+  background:
+    linear-gradient(#ffffff, #ffffff) 50% 0 / 3.5rem 4px no-repeat,
+    linear-gradient(var(--color-accent), var(--color-accent)) 50% 100% / 2rem 4px no-repeat;
+}
+
+/* המשפט המרכזי — ציטוט הקמפיין */
+.statement {
+  margin-block-start: var(--space-4);
+  max-inline-size: 30rem;
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  color: #ffffff;
+  text-wrap: balance;
+}
+
+/* ---------- גוף העמוד ---------- */
+
 .page {
   max-inline-size: var(--content-max);
   margin-inline: auto;
   padding: var(--space-6) var(--page-pad) var(--space-8);
 }
 
-/* ---------- כותרת העמוד: תמונה, שם ומשפט מרכזי ---------- */
-
-.header {
-  text-align: center;
-}
-
-.image {
-  inline-size: min(60vw, 13rem);
-  aspect-ratio: 1;
-  object-fit: cover;
-  margin-inline: auto;
-  border-radius: var(--radius-full);
-  border: 4px solid var(--color-primary-tint);
-  box-shadow: var(--shadow-md);
-  background: var(--color-primary-tint);
-}
-
-.name {
-  margin-block-start: var(--space-5);
-  font-size: var(--fs-2xl);
-  font-weight: var(--fw-black);
-}
-
-/* פס המבטא האדום — ממורכז מתחת לשם */
-.name::after {
-  content: '';
-  display: block;
-  inline-size: 2.75rem;
-  block-size: 4px;
-  border-radius: var(--radius-full);
-  background: var(--color-accent);
-  margin: var(--space-3) auto 0;
-}
-
-.statement {
-  margin-block-start: var(--space-4);
-  font-size: var(--fs-lg);
-  font-weight: var(--fw-bold);
-  color: var(--color-primary-darker);
-  text-wrap: balance;
-}
-
-/* ---------- הטקסט האישי ---------- */
-
 .body {
-  margin-block-start: var(--space-6);
   display: grid;
   gap: var(--space-4);
   color: var(--color-text);
+  font-size: var(--fs-md);
 }
 
 /* ---------- המזכירות המוצעת ---------- */
@@ -68,19 +86,22 @@
 .members {
   margin-block-start: var(--space-4);
   display: grid;
-  gap: var(--space-2);
 }
 
+/* שורת סגל — אותה שפה של עמוד הוועדה */
 .member {
-  display: grid;
-  gap: 2px;
-  padding: var(--space-3) var(--space-4);
-  background: var(--color-bg-alt);
-  border-radius: var(--radius-md);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--space-3);
+  row-gap: var(--space-1);
+  padding-block: var(--space-3);
+  border-block-end: 1px solid var(--color-border);
 }
 
 .memberName {
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-md);
 }
 
 .memberRole {
@@ -99,6 +120,7 @@
   align-items: center;
   gap: var(--space-2);
   font-weight: var(--fw-bold);
+  color: var(--color-primary-dark);
 }
 
 /* ---------- מועמד/ת לא נמצאו ---------- */
@@ -115,7 +137,6 @@
 
 .notFoundTitle {
   font-size: var(--fs-xl);
-  font-weight: var(--fw-black);
 }
 
 .notFoundText {

@@ -64,7 +64,7 @@ export function NavDrawer({ isOpen, onClose, triggerRef }: NavDrawerProps) {
     <dialog
       ref={dialogRef}
       id="nav-drawer"
-      className={styles.drawer}
+      className={`${styles.drawer} ink`}
       aria-label="תפריט ניווט"
       onClose={handleDialogClose}
       onClick={handleBackdropClick}

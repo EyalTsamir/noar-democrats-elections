@@ -29,57 +29,62 @@ export function CandidatePage() {
   }
 
   return (
-    <article className={styles.page}>
-      <header className={styles.header}>
-        <img
-          src={candidateImageUrl(candidate.image)}
-          alt={candidate.imageAlt ?? candidate.fullName}
-          className={styles.image}
-        />
-        <h1 className={styles.name}>{candidate.fullName}</h1>
-        <p className={styles.statement}>{candidate.mainStatement}</p>
+    <article>
+      {/* כותרת בסגנון כרזת קמפיין — תמונה "מודבקת" על לוח דיו */}
+      <header className={`${styles.header} ink`}>
+        <div className={styles.headerInner}>
+          <img
+            src={candidateImageUrl(candidate.image)}
+            alt={candidate.imageAlt ?? candidate.fullName}
+            className={styles.image}
+          />
+          <h1 className={styles.name}>{candidate.fullName}</h1>
+          <p className={styles.statement}>{candidate.mainStatement}</p>
+        </div>
       </header>
 
-      <div className={styles.body}>
-        {candidate.personalText.map((paragraph, index) => (
-          <p key={index}>{paragraph}</p>
-        ))}
-      </div>
+      <div className={styles.page}>
+        <div className={styles.body}>
+          {candidate.personalText.map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
+          ))}
+        </div>
 
-      {candidate.proposedSecretariat && candidate.proposedSecretariat.length > 0 && (
-        <section
-          className={styles.secretariat}
-          aria-labelledby="secretariat-heading"
-        >
-          <h2 id="secretariat-heading" className={`accent-heading ${styles.subTitle}`}>
-            המזכירות המוצעת
-          </h2>
-          <ul className={styles.members}>
-            {candidate.proposedSecretariat.map((member) => (
-              <li key={member.name} className={styles.member}>
-                <span className={styles.memberName}>{member.name}</span>
-                {member.role && (
-                  <span className={styles.memberRole}>{member.role}</span>
-                )}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {candidate.socialLink && (
-        <p className={styles.social}>
-          <a
-            href={candidate.socialLink.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.socialLink}
+        {candidate.proposedSecretariat && candidate.proposedSecretariat.length > 0 && (
+          <section
+            className={styles.secretariat}
+            aria-labelledby="secretariat-heading"
           >
-            {candidate.socialLink.label}
-            <IconExternal size={18} />
-          </a>
-        </p>
-      )}
+            <h2 id="secretariat-heading" className={`accent-heading ${styles.subTitle}`}>
+              המזכירות המוצעת
+            </h2>
+            <ul className={styles.members}>
+              {candidate.proposedSecretariat.map((member) => (
+                <li key={member.name} className={styles.member}>
+                  <span className={styles.memberName}>{member.name}</span>
+                  {member.role && (
+                    <span className={styles.memberRole}>{member.role}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {candidate.socialLink && (
+          <p className={styles.social}>
+            <a
+              href={candidate.socialLink.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialLink}
+            >
+              {candidate.socialLink.label}
+              <IconExternal size={18} />
+            </a>
+          </p>
+        )}
+      </div>
     </article>
   )
 }

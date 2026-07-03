@@ -1,8 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { HashRouter } from 'react-router'
-// גופן Heebo ארוז עם האתר — אין תלות ברשת בזמן ריצה
+// הגופנים ארוזים עם האתר — אין תלות ברשת בזמן ריצה:
+// Heebo לטקסט רץ, Secular One לכותרות התצוגה
 import '@fontsource-variable/heebo/index.css'
+import '@fontsource/secular-one/index.css'
 import './styles/tokens.css'
 import './styles/global.css'
 import App from './App'

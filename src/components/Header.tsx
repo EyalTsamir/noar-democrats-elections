@@ -15,7 +15,7 @@ export function Header() {
   const closeMenu = useCallback(() => setIsMenuOpen(false), [])
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ink`}>
       <div className={styles.inner}>
         <button
           ref={menuButtonRef}

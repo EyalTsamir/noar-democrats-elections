@@ -1,17 +1,21 @@
+/* מצב ריק — "חותמת" נייר מוטה קלות, באותה שפת כרזות של האתר */
+
 .emptyState {
   display: grid;
-  gap: var(--space-1);
+  gap: var(--space-2);
   justify-items: center;
   text-align: center;
   padding: var(--space-6) var(--space-4);
-  background: var(--color-bg-alt);
-  border: 1px dashed var(--color-primary-border);
-  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 2px dashed var(--color-primary-border);
+  border-radius: 2px;
+  rotate: calc(var(--tilt) / 2);
 }
 
 .title {
-  color: var(--color-text-secondary);
-  font-weight: var(--fw-medium);
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  color: var(--color-primary-darker);
 }
 
 .note {

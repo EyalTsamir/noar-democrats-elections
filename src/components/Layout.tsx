@@ -25,8 +25,11 @@ export function Layout({ children }: LayoutProps) {
       <main id="main-content" tabIndex={-1}>
         {children}
       </main>
-      <footer className={styles.footer}>
-        <p>{electionConfig.siteTitle} · 2026</p>
+      <footer className={`${styles.footer} ink`}>
+        {/* פס כפול — הדהוד פסי הלוגו, חתימת הזהות גם בתחתית */}
+        <div className={styles.footerBars} aria-hidden="true" />
+        <p className={styles.footerTitle}>{electionConfig.siteTitle}</p>
+        <p className={styles.footerNote}>מערכת הבחירות 2026 · מהרחוב לכנסת</p>
       </footer>
     </>
   )

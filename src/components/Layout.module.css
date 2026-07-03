@@ -1,8 +1,34 @@
+/* הפוטר — בלוק דיו שסוגר את העמוד באותה שפה של הסרגל העליון */
+
 .footer {
-  background: var(--color-bg-alt);
-  border-block-start: 1px solid var(--color-border);
-  padding: var(--space-5) var(--page-pad);
+  background: var(--color-ink);
+  color: var(--color-on-ink-dim);
+  padding: var(--space-7) var(--page-pad) var(--space-6);
   text-align: center;
-  color: var(--color-text-muted);
   font-size: var(--fs-sm);
+  /* חיתוך אלכסוני עליון — אותה זווית בכל מעברי המקטעים באתר */
+  clip-path: polygon(0 var(--cut), 100% 0, 100% 100%, 0 100%);
+  background-image: var(--noise);
+  background-size: 140px;
+}
+
+/* הפס הכפול של הלוגו — לבן ארוך ואדום קצר, ממורכז */
+.footerBars {
+  inline-size: 3.5rem;
+  block-size: 11px;
+  margin-inline: auto;
+  margin-block-end: var(--space-4);
+  background:
+    linear-gradient(#ffffff, #ffffff) 50% 0 / 3.5rem 4px no-repeat,
+    linear-gradient(var(--color-accent), var(--color-accent)) 50% 100% / 2rem 4px no-repeat;
+}
+
+.footerTitle {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  color: var(--color-on-ink);
+}
+
+.footerNote {
+  margin-block-start: var(--space-2);
 }

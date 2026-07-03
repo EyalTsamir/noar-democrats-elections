@@ -1,0 +1,52 @@
+/* פס הסיסמאות הנע — סרט אדום מוטה שחוצה את העמוד */
+
+.marquee {
+  overflow: hidden;
+  background: var(--color-accent);
+  color: #ffffff;
+  rotate: var(--tilt);
+  /* רחב מעט מהמסך — כך הקצוות המוטים לא חושפים פינות ריקות */
+  inline-size: 104%;
+  margin-inline-start: -2%;
+  margin-block: calc(var(--space-2) * -1) var(--space-2);
+  box-shadow: var(--shadow-md);
+}
+
+.track {
+  display: flex;
+  inline-size: max-content;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .track {
+    animation: slide 26s linear infinite;
+  }
+}
+
+/* הזזה ברוחב עותק אחד בדיוק — שני העותקים זהים והלולאה חלקה */
+@keyframes slide {
+  to {
+    transform: translateX(50%);
+  }
+}
+
+.group {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding-block: var(--space-2);
+  padding-inline-end: var(--space-5);
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  white-space: nowrap;
+}
+
+.diamond {
+  font-size: 0.6em;
+  opacity: 0.8;
+}

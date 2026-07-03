@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@fontsource-variable/heebo": "^5.2.8",
+    "@fontsource/secular-one": "^5.2.8",
     "luxon": "^3.7.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",

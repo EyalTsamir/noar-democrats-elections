@@ -1,24 +1,15 @@
+/* עמוד הוועדה — רשימת סגל עיתונאית: שורות עם קווים דקים, בלי כרטיסים */
+
 .page {
   max-inline-size: var(--content-max);
   margin-inline: auto;
-  padding: var(--space-6) var(--page-pad) var(--space-8);
-}
-
-.title {
-  font-size: var(--fs-2xl);
-  font-weight: var(--fw-black);
-}
-
-.lead {
-  margin-block-start: var(--space-4);
-  color: var(--color-text-secondary);
-  font-size: var(--fs-md);
+  padding: var(--space-5) var(--page-pad) var(--space-8);
 }
 
 .groups {
-  margin-block-start: var(--space-6);
   display: grid;
-  gap: var(--space-6);
+  gap: var(--space-7);
+  margin-block-start: var(--space-4);
 }
 
 .groupTitle {
@@ -26,22 +17,36 @@
   color: var(--color-primary-darker);
 }
 
-.members {
-  margin-block-start: var(--space-3);
-  display: grid;
-  gap: var(--space-2);
+/* ריבוע אדום קטן לפני כותרת הקבוצה — אותו סימן היכר של עמוד המידע */
+.groupTitle::before {
+  content: '';
+  display: inline-block;
+  inline-size: 0.55em;
+  block-size: 0.55em;
+  margin-inline-end: var(--space-2);
+  background: var(--color-accent);
+  rotate: var(--tilt);
 }
 
-.member {
+.members {
+  margin-block-start: var(--space-2);
   display: grid;
-  gap: 2px;
-  padding: var(--space-3) var(--space-4);
-  background: var(--color-bg-alt);
-  border-radius: var(--radius-md);
+}
+
+/* שורת סגל — שם ותפקיד על קו בסיס משותף, קו מפריד דק */
+.member {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--space-3);
+  row-gap: var(--space-1);
+  padding-block: var(--space-3);
+  border-block-end: 1px solid var(--color-border);
 }
 
 .memberName {
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-md);
 }
 
 .memberRole {

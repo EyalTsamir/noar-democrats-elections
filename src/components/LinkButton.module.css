@@ -1,3 +1,5 @@
+/* כפתורי פעולה — צורה זוויתית של כרזה, כיתוב בגופן התצוגה */
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -5,12 +7,15 @@
   gap: var(--space-2);
   min-block-size: 48px; /* יעד מגע נוח */
   padding: var(--space-2) var(--space-6);
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-weight: var(--fw-regular);
   font-size: var(--fs-md);
-  font-weight: var(--fw-bold);
   text-decoration: none;
   transition:
     background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
     transform var(--duration-fast) var(--ease-standard),
     box-shadow var(--duration-fast) var(--ease-standard);
 }
@@ -18,6 +23,8 @@
 .button:active {
   transform: translateY(1px);
 }
+
+/* ---------- כחול מלא — פעולה ראשית על רקע בהיר ---------- */
 
 .primary {
   background: var(--color-primary);
@@ -34,15 +41,57 @@
   background: var(--color-primary-darker);
 }
 
+/* ---------- מתאר כחול — פעולה משנית על רקע בהיר ---------- */
+
 .secondary {
-  background: var(--color-bg);
-  color: var(--color-primary);
-  border: 2px solid var(--color-primary-border);
+  background: transparent;
+  color: var(--color-primary-dark);
+  border: 2px solid var(--color-primary);
 }
 
 .secondary:hover {
-  border-color: var(--color-primary);
   background: var(--color-primary-tint);
+}
+
+/* ---------- מתאר לבן — פעולה על משטח דיו כהה ---------- */
+
+.ghost {
+  background: transparent;
+  color: var(--color-on-ink);
+  border: 2px solid rgb(255 255 255 / 0.75);
+}
+
+.ghost:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: var(--color-ink);
+}
+
+/* ---------- אדום בוהק — קריאת ההצבעה ביום הבחירות ---------- */
+
+.urgent {
+  background: var(--color-accent);
+  color: #ffffff;
+  font-size: var(--fs-lg);
+  padding: var(--space-3) var(--space-7);
+  box-shadow: 0 0 0 0 rgb(224 35 52 / 0.55);
+}
+
+.urgent:hover {
+  background: var(--color-accent-deep);
+}
+
+/* פעימת דופק סביב כפתור ההצבעה — דחיפות בלי ריצוד תוכן */
+@media (prefers-reduced-motion: no-preference) {
+  .urgent {
+    animation: pulse 2.2s var(--ease-standard) infinite;
+  }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgb(224 35 52 / 0.55); }
+  70% { box-shadow: 0 0 0 14px rgb(224 35 52 / 0); }
+  100% { box-shadow: 0 0 0 0 rgb(224 35 52 / 0); }
 }
 
 /* בטלפונים צרים הכפתור נמתח לרוחב מלא — נוכח וקל ללחיצה */

@@ -1,3 +1,6 @@
+/* הספירה לאחור — טיפוגרפיה גדולה על משטח הדיו, בלי קופסאות.
+   ספרות לבנות ענקיות, קווי הפרדה דקים, פס אדום מתחת ליחידת הימים. */
+
 .countdown {
   display: flex;
   justify-content: center;
@@ -5,26 +8,42 @@
 
 .units {
   display: flex;
-  gap: var(--space-3);
+  align-items: start;
 }
 
 .unit {
   display: grid;
   justify-items: center;
   gap: var(--space-1);
-  min-inline-size: 4.25rem;
-  padding: var(--space-3) var(--space-2);
-  background: var(--color-bg);
-  border: 1px solid var(--color-primary-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  min-inline-size: clamp(3.9rem, 20vw, 6.25rem);
+  padding-inline: var(--space-1);
+}
+
+/* קו הפרדה דק בין היחידות */
+.unit:not(:first-child) {
+  border-inline-start: 1px solid rgb(255 255 255 / 0.25);
+}
+
+/* יחידת הימים (הראשונה בכיוון הקריאה) — מסומנת בפס אדום.
+   הצבע ניתן לדריסה דרך המשתנה — ביום ההצבעה הוא מוחלף בלבן. */
+.unit:first-child {
+  position: relative;
+}
+
+.unit:first-child::after {
+  content: '';
+  position: absolute;
+  inset-block-end: -10px;
+  inset-inline: 22%;
+  block-size: 4px;
+  background: var(--countdown-accent, var(--color-accent));
 }
 
 .value {
-  font-size: var(--fs-xl);
+  font-size: clamp(2.3rem, 9vw, 4rem);
   font-weight: var(--fw-black);
   line-height: 1;
-  color: var(--color-primary);
+  color: #ffffff;
   /* ספרות ברוחב אחיד — אין ריצוד כשהשניות מתחלפות */
   font-variant-numeric: tabular-nums;
 }
@@ -32,21 +51,5 @@
 .unitLabel {
   font-size: var(--fs-sm);
   font-weight: var(--fw-medium);
-  color: var(--color-text-muted);
-}
-
-/* בטלפונים צרים — קופסאות מעט קטנות יותר כדי שהשורה לא תגלוש */
-@media (max-width: 479px) {
-  .units {
-    gap: var(--space-2);
-  }
-
-  .unit {
-    min-inline-size: 3.75rem;
-    padding: var(--space-2) var(--space-1);
-  }
-
-  .value {
-    font-size: var(--fs-lg);
-  }
+  color: var(--color-on-ink-dim);
 }

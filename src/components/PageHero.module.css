@@ -1,0 +1,56 @@
+/* רצועת הכותרת של עמודים פנימיים — דיו כהה, צילום דואוטון, חיתוך אלכסוני */
+
+.hero {
+  position: relative;
+  background: var(--color-ink);
+  background-image: var(--noise);
+  background-size: 140px;
+  color: var(--color-on-ink);
+  padding: var(--space-7) var(--page-pad) calc(var(--space-6) + var(--cut));
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--cut)), 0 100%);
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(200deg, var(--color-primary-dark) 0%, var(--color-ink) 85%);
+  overflow: hidden;
+}
+
+.photo {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  /* הצילום האפור מקבל את הגוון מהרקע — דואוטון חי */
+  mix-blend-mode: luminosity;
+  opacity: 0.45;
+}
+
+/* האפלה + גרעון — הכותרת קריאה מעל הצילום */
+.media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgb(11 16 64 / 0.45) 0%, rgb(11 16 64 / 0.9) 100%),
+    var(--noise);
+  background-size: auto, 140px;
+}
+
+.inner {
+  position: relative;
+  max-inline-size: var(--content-max);
+  margin-inline: auto;
+}
+
+.title {
+  font-size: var(--fs-2xl);
+}
+
+.lead {
+  margin-block-start: var(--space-4);
+  max-inline-size: 36rem;
+  color: var(--color-on-ink-dim);
+  font-size: var(--fs-md);
+  text-wrap: pretty;
+}

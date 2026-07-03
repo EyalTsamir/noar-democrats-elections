@@ -1,5 +1,5 @@
 /* ============================================================
-   מגירת הניווט — dialog מקורי שנצמד לצד ימין (inline-start בעברית)
+   מגירת הניווט — לוח דיו כהה שנצמד לצד ימין (inline-start בעברית)
    ============================================================ */
 
 .drawer {
@@ -14,8 +14,11 @@
   max-block-size: none;
   border: none;
   padding: 0;
-  background: var(--color-bg);
+  background: var(--color-ink);
+  color: var(--color-on-ink);
   box-shadow: var(--shadow-drawer);
+  /* פס אדום לאורך שפת הפתיחה — המשך חתימת המותג מהסרגל העליון */
+  border-inline-end: 3px solid var(--color-accent);
   /* הטרנספורם פיזי בכוונה: האתר תמיד RTL, והמגירה תמיד בצד ימין,
      ולכן translateX(100%)‎ = החוצה מהמסך ימינה */
   transition:
@@ -75,13 +78,16 @@
   overflow-y: auto;
   /* עוצר שרשור גלילה אל הרקע הנעול */
   overscroll-behavior: contain;
-  padding: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  /* טקסטורת נייר עדינה על הדיו */
+  background-image: var(--noise);
+  background-size: 140px;
 }
 
 .drawerTop {
   display: flex;
   justify-content: flex-end;
-  padding-block-end: var(--space-2);
+  padding-block-end: var(--space-4);
 }
 
 .closeButton {
@@ -93,55 +99,61 @@
   border: none;
   background: transparent;
   border-radius: var(--radius-md);
-  color: var(--color-text-secondary);
+  color: var(--color-on-ink-dim);
   transition:
     background-color var(--duration-fast) var(--ease-standard),
     color var(--duration-fast) var(--ease-standard);
 }
 
 .closeButton:hover {
-  background: var(--color-bg-alt);
-  color: var(--color-text);
+  background: var(--color-ink-soft);
+  color: var(--color-on-ink);
 }
 
 .navList {
   display: grid;
-  gap: 2px;
+  gap: var(--space-1);
 }
 
+/* פריטי הניווט הראשיים — טיפוגרפיית כרזה גדולה */
 .navLink {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-2);
   inline-size: 100%;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-3) var(--space-3);
   border: none;
   background: transparent;
-  border-radius: var(--radius-md);
-  color: var(--color-text);
-  font-size: var(--fs-md);
-  font-weight: var(--fw-medium);
+  border-radius: var(--radius-sm);
+  color: var(--color-on-ink);
+  font-family: var(--font-display);
+  font-weight: var(--fw-regular);
+  font-size: 1.45rem;
+  line-height: 1.2;
   text-align: start;
   text-decoration: none;
+  /* פס סימון בכיוון הקריאה — נדלק באדום בעמוד הפעיל */
+  border-inline-start: 4px solid transparent;
   transition:
     background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
     color var(--duration-fast) var(--ease-standard);
 }
 
 .navLink:hover {
-  background: var(--color-bg-alt);
+  background: var(--color-ink-soft);
 }
 
 /* העמוד הנוכחי — NavLink מוסיף aria-current="page" אוטומטית */
 .navLinkActive {
-  background: var(--color-primary-tint);
-  color: var(--color-primary);
-  font-weight: var(--fw-bold);
+  border-inline-start-color: var(--color-accent);
+  background: var(--color-ink-soft);
 }
 
 .chevron {
   flex-shrink: 0;
+  color: var(--color-on-ink-dim);
   transition: transform var(--duration-fast) var(--ease-standard);
 }
 
@@ -155,16 +167,16 @@
   display: grid;
   gap: 2px;
   margin-inline-start: var(--space-4);
-  margin-block: var(--space-1);
+  margin-block: var(--space-1) var(--space-2);
   padding-inline-start: var(--space-3);
-  border-inline-start: 2px solid var(--color-primary-border);
+  border-inline-start: 2px solid var(--color-ink-soft);
 }
 
 .subLink {
   display: block;
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-sm);
-  color: var(--color-text-secondary);
+  color: var(--color-on-ink-dim);
   text-decoration: none;
   transition:
     background-color var(--duration-fast) var(--ease-standard),
@@ -172,13 +184,13 @@
 }
 
 .subLink:hover {
-  background: var(--color-bg-alt);
-  color: var(--color-text);
+  background: var(--color-ink-soft);
+  color: var(--color-on-ink);
 }
 
 .subLinkActive {
-  background: var(--color-primary-tint);
-  color: var(--color-primary);
+  background: var(--color-ink-soft);
+  color: var(--color-on-ink);
   font-weight: var(--fw-bold);
 }
 
@@ -186,7 +198,7 @@
 .submenuEmpty {
   margin-inline-start: var(--space-4);
   padding: var(--space-2) var(--space-3);
-  color: var(--color-text-muted);
+  color: var(--color-on-ink-dim);
   font-size: var(--fs-sm);
 }
 
@@ -197,8 +209,8 @@
   align-items: center;
   gap: var(--space-2);
   margin-block-start: auto;
-  padding: var(--space-4) var(--space-4) var(--space-2);
-  color: var(--color-text-muted);
+  padding: var(--space-4) var(--space-2) var(--space-2);
+  color: var(--color-on-ink-dim);
   font-size: var(--fs-sm);
 }
 

@@ -4,7 +4,11 @@ import styles from './LinkButton.module.css'
 
 // או קישור פנימי (to) או קישור חיצוני (href) — לא שניהם יחד
 type LinkButtonProps = {
-  variant?: 'primary' | 'secondary'
+  /**
+   * primary — כחול מלא (רקע בהיר) · secondary — מתאר כחול (רקע בהיר)
+   * ghost — מתאר לבן (משטח דיו כהה) · urgent — אדום בוהק (קריאת ההצבעה)
+   */
+  variant?: 'primary' | 'secondary' | 'ghost' | 'urgent'
   children: ReactNode
 } & ({ to: string; href?: never } | { href: string; to?: never })
 
