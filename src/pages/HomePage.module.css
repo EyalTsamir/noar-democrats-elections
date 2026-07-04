@@ -123,16 +123,34 @@
   text-wrap: balance;
 }
 
-/* שורת הסבר מעל הספירה לאחור */
+/* שורת ההסבר מעל הספירה: פתיח שקט + יעד בולט, מוערמים במרכז */
 .countdownLead {
   margin-block-start: var(--space-5);
-  color: var(--color-on-ink-dim);
-  font-size: var(--fs-md);
-  font-weight: var(--fw-medium);
+  display: grid;
+  justify-items: center;
+  gap: var(--space-1);
 }
 
-.hero[data-phase='voting-open'] .countdownLead {
-  color: rgb(255 255 255 / 0.85);
+/* "הזמן שנותר עד" — תווית עֵינִית שקטה מעל היעד */
+.countdownEyebrow {
+  color: var(--color-on-ink-dim);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.04em;
+}
+
+/* היעד עצמו — תת-כותרת בהירה בגופן התצוגה, מחוברת חזותית לשעון */
+.countdownTarget {
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+/* ביום ההצבעה הפתיח נעשה לבן־שקוף כדי לשבת על הדיו האדום */
+.hero[data-phase='voting-open'] .countdownEyebrow {
+  color: rgb(255 255 255 / 0.8);
 }
 
 .countdownWrap {

@@ -73,6 +73,20 @@ export function HomePage() {
   )
 }
 
+/**
+ * שורת "הזמן שנותר עד <יעד>".
+ * הפתיח שקט ומעומעם, והיעד עצמו בולט כתת-כותרת בהירה מעל השעון —
+ * כך העין קוראת: כותרת הפוסטר ← מה סופרים אליו ← הספירה.
+ */
+function CountdownLead({ heading }: { heading: string }) {
+  return (
+    <p className={styles.countdownLead}>
+      <span className={styles.countdownEyebrow}>הזמן שנותר עד</span>
+      <span className={styles.countdownTarget}>{heading}</span>
+    </p>
+  )
+}
+
 /** תוכן ה-Hero המשתנה לפי שלב הבחירות */
 function HeroContent({ phase, now }: { phase: ElectionPhase; now: DateTime }) {
   switch (phase.id) {
@@ -88,7 +102,7 @@ function HeroContent({ phase, now }: { phase: ElectionPhase; now: DateTime }) {
             <span className={styles.titleOutline}>בחירות</span>{' '}
             <span className={styles.titleSolid}>בנוער הדמוקרטים!</span>
           </h1>
-          <p className={styles.countdownLead}>הזמן שנותר עד {heading}</p>
+          <CountdownLead heading={heading} />
           {phase.target && (
             <div className={styles.countdownWrap}>
               <Countdown parts={getCountdownParts(now, phase.target)} label={heading} />
@@ -110,7 +124,7 @@ function HeroContent({ phase, now }: { phase: ElectionPhase; now: DateTime }) {
       return (
         <>
           <h1 className={styles.titleVoting}>{phaseCopy.votingDayHeadline}</h1>
-          <p className={styles.countdownLead}>הזמן שנותר עד {countdownHeadings['voting-open']}</p>
+          <CountdownLead heading={countdownHeadings['voting-open']} />
           {phase.target && (
             <div className={styles.countdownWrap}>
               <Countdown parts={getCountdownParts(now, phase.target)} label={countdownHeadings['voting-open']} />

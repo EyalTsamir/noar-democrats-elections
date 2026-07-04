@@ -67,7 +67,7 @@
   white-space: nowrap;
 }
 
-/* שני פסי הלוגו — חורגים מעט מרוחב הטקסט, כמו במקור */
+/* שני פסי הלוגו — חורגים מעט מרוחב הטקסט, כמו במקור. שניהם לבנים */
 .homeLink::before,
 .homeLink::after {
   content: '';
@@ -75,14 +75,11 @@
   margin-inline: -8px;
   block-size: 3px;
   background: currentColor;
-  transition:
-    background-color var(--duration-fast) var(--ease-standard),
-    transform var(--duration-fast) var(--ease-standard);
+  transition: transform var(--duration-fast) var(--ease-standard);
 }
 
-/* בריחוף ובפוקוס הפס התחתון נדלק באדום — הדהוד פסי הפוטר והכותרות */
+/* בריחוף ובפוקוס הפס התחתון מתרחב מעט — בלי צבע אדום */
 .homeLink:hover::after,
 .homeLink:focus-visible::after {
-  background: var(--color-accent);
   transform: scaleX(1.06);
 }
