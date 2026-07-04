@@ -26,7 +26,7 @@ export const infoSections: InfoSection[] = [
   {
     id: 'threshold',
     title: 'תנאי הסף',
-    bullets: ['ותק של חצי שנה לפחות בנוער', 'גיל מעל 16'],
+    bullets: ['ותק של חודש לפחות בנוער', 'גיל מעל 16'],
   },
   {
     id: 'exemption',
