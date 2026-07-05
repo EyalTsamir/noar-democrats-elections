@@ -13,14 +13,16 @@ import type { ElectionConfig } from '../content/types'
  * כשתוחלט תצוגת התוצאות. אין לממש כרגע תוצאות/זוכה/נתונים.
  */
 export type ElectionPhaseId =
+  | 'before-candidacy-close'
   | 'before-registry-close'
   | 'before-debate'
   | 'before-voting'
   | 'voting-open'
   | 'voting-closed'
 
-/** ארבע נקודות הזמן שמפרידות בין השלבים (רגעים מוחלטים) */
+/** חמש נקודות הזמן שמפרידות בין השלבים (רגעים מוחלטים) */
 export interface ElectionBoundaries {
+  candidacyClose: DateTime
   registryClose: DateTime
   debate: DateTime
   votingOpen: DateTime
@@ -53,6 +55,7 @@ function zonedMoment(date: string, time: string, zone: string): DateTime {
 export function getElectionBoundaries(config: ElectionConfig): ElectionBoundaries {
   const zone = config.timezone
   return {
+    candidacyClose: zonedMoment(config.candidacyCloseDate, config.candidacyCloseTime, zone),
     registryClose: zonedMoment(config.registryCloseDate, config.registryCloseTime, zone),
     debate: zonedMoment(config.debateDate, config.debateTime, zone),
     votingOpen: zonedMoment(config.electionDate, config.votingStartTime, zone),
@@ -66,23 +69,25 @@ export function getElectionBoundaries(config: ElectionConfig): ElectionBoundarie
  * הסמנטיקה: בדיוק ברגע הגבול כבר עוברים לשלב הבא (השוואת < חמורה).
  */
 export function getElectionPhase(now: DateTime, boundaries: ElectionBoundaries): ElectionPhase {
-  const { registryClose, debate, votingOpen, votingClose } = boundaries
+  const { candidacyClose, registryClose, debate, votingOpen, votingClose } = boundaries
 
   // הגנה: אם אחת מנקודות הזמן אינה תקינה (תאריך ריק/שגוי), אל תסיק בטעות
   // "ההצבעה נסתיימה" (כי NaN < x הוא תמיד false) — היוותר בשלב הראשון.
   if (
+    !candidacyClose.isValid ||
     !registryClose.isValid ||
     !debate.isValid ||
     !votingOpen.isValid ||
     !votingClose.isValid
   ) {
     return {
-      id: 'before-registry-close',
-      target: registryClose.isValid ? registryClose : null,
+      id: 'before-candidacy-close',
+      target: candidacyClose.isValid ? candidacyClose : null,
     }
   }
 
   const nowMs = now.toMillis()
+  if (nowMs < candidacyClose.toMillis()) return { id: 'before-candidacy-close', target: candidacyClose }
   if (nowMs < registryClose.toMillis()) return { id: 'before-registry-close', target: registryClose }
   if (nowMs < debate.toMillis()) return { id: 'before-debate', target: debate }
   if (nowMs < votingOpen.toMillis()) return { id: 'before-voting', target: votingOpen }

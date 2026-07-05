@@ -19,6 +19,8 @@ export const electionConfig: ElectionConfig = {
 
   // מועדי הביניים — הספירה לאחור בעמוד הבית מתעדכנת מהם אוטומטית
   // (התאריך בפורמט שנה-חודש-יום, השעה בפורמט שעה:דקה, בשעון ישראל)
+  candidacyCloseDate: '2026-07-10',
+  candidacyCloseTime: '22:00',
   registryCloseDate: '2026-07-15',
   registryCloseTime: '22:00',
   debateDate: '2026-07-18',

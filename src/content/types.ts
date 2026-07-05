@@ -110,9 +110,13 @@ export interface ElectionConfig {
   introText: string;
   /** אזור הזמן של הבחירות — קבוע, אין לשנות */
   timezone: 'Asia/Jerusalem';
-  /** תאריך סגירת ספר הבוחרים וטופס המועמדות בפורמט 'YYYY-MM-DD' */
+  /** תאריך סגירת הגשת המועמדות בפורמט 'YYYY-MM-DD' */
+  candidacyCloseDate: string;
+  /** שעת סגירת הגשת המועמדות בפורמט 'HH:MM' */
+  candidacyCloseTime: string;
+  /** תאריך סגירת ספר המצביעים בפורמט 'YYYY-MM-DD' */
   registryCloseDate: string;
-  /** שעת סגירת ספר הבוחרים וטופס המועמדות בפורמט 'HH:MM' */
+  /** שעת סגירת ספר המצביעים בפורמט 'HH:MM' */
   registryCloseTime: string;
   /** תאריך עימות המועמדים בפורמט 'YYYY-MM-DD' */
   debateDate: string;

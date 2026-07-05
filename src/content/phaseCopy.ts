@@ -12,7 +12,8 @@ import type { ElectionPhaseId } from '../utils/electionPhase'
  * (בשלב "ההצבעה נסגרה" אין ספירה, ולכן הוא לא מופיע כאן.)
  */
 export const countdownHeadings: Record<Exclude<ElectionPhaseId, 'voting-closed'>, string> = {
-  'before-registry-close': 'סגירת ספר הבוחרים וטופס המועמדות',
+  'before-candidacy-close': 'סגירת הגשת המועמדות',
+  'before-registry-close': 'סגירת ספר המצביעים',
   'before-debate': 'עימות המועמדים',
   'before-voting': 'פתיחת ההצבעה',
   'voting-open': 'סגירת ההצבעה',

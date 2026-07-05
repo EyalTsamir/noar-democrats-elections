@@ -19,7 +19,8 @@ function il(iso: string): DateTime {
 
 // נקודות הזמן הנדרשות (מקור האמת: electionConfig)
 const boundaries = getElectionBoundaries(electionConfig)
-const rc = il('2026-07-15T22:00') // סגירת ספר הבוחרים
+const cc = il('2026-07-10T22:00') // סגירת הגשת המועמדות
+const rc = il('2026-07-15T22:00') // סגירת ספר המצביעים
 const db = il('2026-07-18T22:00') // עימות המועמדים
 const vo = il('2026-07-22T10:00') // פתיחת ההצבעה
 const vc = il('2026-07-22T22:00') // סגירת ההצבעה
@@ -30,7 +31,8 @@ afterEach(() => {
 })
 
 describe('getElectionBoundaries', () => {
-  it('כל ארבע נקודות הזמן תקינות', () => {
+  it('כל חמש נקודות הזמן תקינות', () => {
+    expect(boundaries.candidacyClose.isValid).toBe(true)
     expect(boundaries.registryClose.isValid).toBe(true)
     expect(boundaries.debate.isValid).toBe(true)
     expect(boundaries.votingOpen.isValid).toBe(true)
@@ -38,6 +40,7 @@ describe('getElectionBoundaries', () => {
   })
 
   it('הנקודות תואמות במדויק את המועדים הנדרשים', () => {
+    expect(boundaries.candidacyClose.toMillis()).toBe(cc.toMillis())
     expect(boundaries.registryClose.toMillis()).toBe(rc.toMillis())
     expect(boundaries.debate.toMillis()).toBe(db.toMillis())
     expect(boundaries.votingOpen.toMillis()).toBe(vo.toMillis())
@@ -52,13 +55,27 @@ describe('getElectionBoundaries', () => {
     const broken = getElectionBoundaries({ ...electionConfig, registryCloseDate: '' })
     expect(broken.registryClose.isValid).toBe(false)
     // גם הרבה אחרי כל התאריכים — נשארים בשלב הראשון בגלל נקודה לא-תקינה
-    expect(getElectionPhase(il('2026-08-01T00:00'), broken).id).toBe('before-registry-close')
+    expect(getElectionPhase(il('2026-08-01T00:00'), broken).id).toBe('before-candidacy-close')
   })
 })
 
 describe('getElectionPhase — גבולות מדויקים', () => {
-  it('הרבה לפני סגירת הספר → before-registry-close', () => {
-    expect(getElectionPhase(il('2026-07-01T12:00'), boundaries).id).toBe('before-registry-close')
+  it('הרבה לפני סגירת המועמדות → before-candidacy-close', () => {
+    expect(getElectionPhase(il('2026-07-01T12:00'), boundaries).id).toBe('before-candidacy-close')
+  })
+
+  it('שנייה לפני סגירת המועמדות → before-candidacy-close', () => {
+    expect(getElectionPhase(cc.minus({ seconds: 1 }), boundaries).id).toBe('before-candidacy-close')
+  })
+
+  it('בדיוק בסגירת המועמדות → before-registry-close (מעבר על הגבול)', () => {
+    const p = getElectionPhase(cc, boundaries)
+    expect(p.id).toBe('before-registry-close')
+    expect(p.target?.toMillis()).toBe(rc.toMillis())
+  })
+
+  it('בין סגירת המועמדות לסגירת הספר → before-registry-close', () => {
+    expect(getElectionPhase(il('2026-07-12T12:00'), boundaries).id).toBe('before-registry-close')
   })
 
   it('שנייה לפני סגירת הספר → before-registry-close', () => {
@@ -202,17 +219,20 @@ describe('סנכרון בין ההגדרות ללוח הזמנים (drift-guard)
   it('הגבולות שנגזרו מ-electionConfig תואמים את מחרוזות התצוגה ב-infoSections', () => {
     const schedule = infoSections.find((section) => section.id === 'schedule')
     const events = schedule?.events ?? []
-    expect(events).toHaveLength(3)
+    expect(events).toHaveLength(4)
 
-    expect(boundaries.registryClose.setZone(zone).toFormat('d.M.yyyy')).toBe(events[0].date)
-    expect(boundaries.registryClose.setZone(zone).toFormat('HH:mm')).toBe(events[0].time)
+    expect(boundaries.candidacyClose.setZone(zone).toFormat('d.M.yyyy')).toBe(events[0].date)
+    expect(boundaries.candidacyClose.setZone(zone).toFormat('HH:mm')).toBe(events[0].time)
 
-    expect(boundaries.debate.setZone(zone).toFormat('d.M.yyyy')).toBe(events[1].date)
-    expect(boundaries.debate.setZone(zone).toFormat('HH:mm')).toBe(events[1].time)
+    expect(boundaries.registryClose.setZone(zone).toFormat('d.M.yyyy')).toBe(events[1].date)
+    expect(boundaries.registryClose.setZone(zone).toFormat('HH:mm')).toBe(events[1].time)
 
-    expect(boundaries.votingOpen.setZone(zone).toFormat('d.M.yyyy')).toBe(events[2].date)
+    expect(boundaries.debate.setZone(zone).toFormat('d.M.yyyy')).toBe(events[2].date)
+    expect(boundaries.debate.setZone(zone).toFormat('HH:mm')).toBe(events[2].time)
+
+    expect(boundaries.votingOpen.setZone(zone).toFormat('d.M.yyyy')).toBe(events[3].date)
     // טווח שעות ההצבעה — בודקים הכלה כדי לא להיתלות בתו המקף המדויק
-    expect(events[2].time).toContain(boundaries.votingOpen.setZone(zone).toFormat('HH:mm'))
-    expect(events[2].time).toContain(boundaries.votingClose.setZone(zone).toFormat('HH:mm'))
+    expect(events[3].time).toContain(boundaries.votingOpen.setZone(zone).toFormat('HH:mm'))
+    expect(events[3].time).toContain(boundaries.votingClose.setZone(zone).toFormat('HH:mm'))
   })
 })

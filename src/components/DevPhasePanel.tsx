@@ -18,6 +18,7 @@ interface BoundaryLink {
 }
 
 const BOUNDARIES: BoundaryLink[] = [
+  { label: 'סגירת מועמדות', date: electionConfig.candidacyCloseDate, time: electionConfig.candidacyCloseTime },
   { label: 'סגירת הספר', date: electionConfig.registryCloseDate, time: electionConfig.registryCloseTime },
   { label: 'עימות', date: electionConfig.debateDate, time: electionConfig.debateTime },
   { label: 'פתיחת הצבעה', date: electionConfig.electionDate, time: electionConfig.votingStartTime },

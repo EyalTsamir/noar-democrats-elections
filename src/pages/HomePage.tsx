@@ -90,7 +90,8 @@ function CountdownLead({ heading }: { heading: string }) {
 /** תוכן ה-Hero המשתנה לפי שלב הבחירות */
 function HeroContent({ phase, now }: { phase: ElectionPhase; now: DateTime }) {
   switch (phase.id) {
-    // שלושת שלבי הספירה לאחור — אותו מבנה, יעד שונה
+    // ארבעת שלבי הספירה לאחור — אותו מבנה, יעד שונה
+    case 'before-candidacy-close':
     case 'before-registry-close':
     case 'before-debate':
     case 'before-voting': {
