@@ -53,8 +53,8 @@ export interface Candidate {
   personalText: string[];
   /** המזכירות המוצעת (לא חובה) */
   proposedSecretariat?: SecretariatMember[];
-  /** קישור לרשת חברתית (לא חובה) */
-  socialLink?: SocialLink;
+  /** קישורים לרשתות חברתיות (לא חובה, אפשר כמה) */
+  socialLinks?: SocialLink[];
 }
 
 /** חבר/ת ועדת הבחירות */

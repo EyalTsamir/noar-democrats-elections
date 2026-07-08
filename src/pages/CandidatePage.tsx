@@ -71,18 +71,22 @@ export function CandidatePage() {
           </section>
         )}
 
-        {candidate.socialLink && (
-          <p className={styles.social}>
-            <a
-              href={candidate.socialLink.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.socialLink}
-            >
-              {candidate.socialLink.label}
-              <IconExternal size={18} />
-            </a>
-          </p>
+        {candidate.socialLinks && candidate.socialLinks.length > 0 && (
+          <ul className={styles.social}>
+            {candidate.socialLinks.map((link) => (
+              <li key={link.url}>
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.socialLink}
+                >
+                  {link.label}
+                  <IconExternal size={18} />
+                </a>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
     </article>

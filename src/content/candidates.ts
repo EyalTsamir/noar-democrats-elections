@@ -33,14 +33,15 @@ import type { Candidate } from './types'
  *      { name: 'שם מלא', role: 'תחום אחריות' },
  *      { name: 'שם מלא בלי תפקיד' },
  *    ],
- *    socialLink: {
- *      label: 'האינסטגרם של דנה',
- *      url: 'https://instagram.com/example',
- *    },
+ *    socialLinks: [
+ *      { label: 'האינסטגרם של דנה', url: 'https://instagram.com/example' },
+ *      { label: 'הטוויטר של דנה', url: 'https://x.com/example' },
+ *    ],
  *  },
  *
  * הערות:
- * - imageAlt, proposedSecretariat ו-socialLink אינם חובה — אפשר למחוק אותם.
+ * - imageAlt, proposedSecretariat ו-socialLinks אינם חובה — אפשר למחוק אותם.
+ * - socialLinks הוא מערך — אפשר לשים קישור אחד, כמה, או להשמיט לגמרי.
  * - חשוב לשמור על הפסיק אחרי הסוגר } של כל מועמד/ת.
  * - סדר המועמדים כאן לא קובע כלום — האתר מציג אותם בסדר אקראי
  *   שמוגרל מחדש בכל כניסה ובכל מעבר עמוד.
@@ -63,10 +64,12 @@ export const candidates: Candidate[] = [
       { name: 'ישראל גלילי', role: 'דובר' },
       { name: 'יצחק בן־אהרן', role: 'רכז שטח' },
     ],
-    socialLink: {
-      label: 'עמוד הפייסבוק של שמעון פרס',
-      url: 'https://www.facebook.com/ShimonPeresInt/?locale=he_IL',
-    },
+    socialLinks: [
+      {
+        label: 'עמוד הפייסבוק של שמעון פרס',
+        url: 'https://www.facebook.com/ShimonPeresInt/?locale=he_IL',
+      },
+    ],
   },
   {
     id: 'yitzhak-rabin',
@@ -84,9 +87,31 @@ export const candidates: Candidate[] = [
       { name: 'אורי סביר', role: 'דובר' },
       { name: 'יגאל אלון', role: 'רכז שטח' },
     ],
-    socialLink: {
-      label: 'הרשת החברתית של יצחק רבין',
-      url: 'https://www.facebook.com/rabincenter/mentions/',
-    },
+    socialLinks: [
+      {
+        label: 'הרשת החברתית של יצחק רבין',
+        url: 'https://www.facebook.com/rabincenter/mentions/',
+      },
+    ],
+  },
+  {
+    id: 'alon-de-leon',
+    slug: 'alon-de-leon',
+    fullName: 'אלון דה לאון',
+    image: 'alon-de-leon.svg',
+    mainStatement: 'תקופות גורליות דורשות מנהיגים חזקים',
+    personalText: [
+      'אני אלון דה לאון, בן 16, סגן היו"ר הנוכחי ו(בתקווה) היו"ר הבא. לקחתי חלק במאבק למען החטופים בשנים האחרונות, בין היתר דרך הארגון נוער למען החטופים. בנוסף אני מתנדב באדם לאדם זה לב, התראיינתי בעבר למספר גורמי תקשורת ויש לי ניסיון רב דרך המחאה, ההתנדבות וכמובן המזכירות.',
+    ],
+    socialLinks: [
+      {
+        label: 'האינסטגרם של אלון',
+        url: 'https://www.instagram.com/alondon124?igsh=c2QwaDljeGx2NmJh',
+      },
+      {
+        label: 'הטוויטר של אלון',
+        url: 'https://x.com/AlonDeleonn',
+      },
+    ],
   },
 ]

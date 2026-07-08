@@ -113,6 +113,8 @@
 
 .social {
   margin-block-start: var(--space-6);
+  display: grid;
+  gap: var(--space-3);
 }
 
 .socialLink {
