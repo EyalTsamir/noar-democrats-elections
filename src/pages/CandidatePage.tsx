@@ -1,10 +1,27 @@
 import { useParams } from 'react-router'
-import { IconExternal } from '../components/icons'
+import {
+  IconArrowForward,
+  IconExternal,
+  IconFacebook,
+  IconInstagram,
+  IconTikTok,
+  IconX,
+} from '../components/icons'
 import { LinkButton } from '../components/LinkButton'
 import { candidates } from '../content/candidates'
 import { candidateImageUrl } from '../utils/candidateImage'
 import { useDocumentTitle } from '../utils/useDocumentTitle'
 import styles from './CandidatePage.module.css'
+
+/** בחירת אייקון לפי כתובת הקישור — עורכי התוכן לא צריכים לציין רשת */
+function SocialIcon({ url }: { url: string }) {
+  const size = 20
+  if (url.includes('instagram.com')) return <IconInstagram size={size} />
+  if (url.includes('x.com') || url.includes('twitter.com')) return <IconX size={size} />
+  if (url.includes('facebook.com') || url.includes('fb.com')) return <IconFacebook size={size} />
+  if (url.includes('tiktok.com')) return <IconTikTok size={size} />
+  return <IconExternal size={size} />
+}
 
 /** העמוד האישי של מועמד/ת — נטען לפי ה-slug שבכתובת */
 export function CandidatePage() {
@@ -44,11 +61,17 @@ export function CandidatePage() {
       </header>
 
       <div className={styles.page}>
-        <div className={styles.body}>
-          {candidate.personalText.map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-          ))}
-        </div>
+        {/* הטקסט האישי — כותרת מקטע כדי שהגוף לא יתחיל באופן חטוף */}
+        <section aria-labelledby="about-heading">
+          <h2 id="about-heading" className={`accent-heading ${styles.subTitle}`}>
+            קצת עליי
+          </h2>
+          <div className={styles.body}>
+            {candidate.personalText.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
+          </div>
+        </section>
 
         {candidate.proposedSecretariat && candidate.proposedSecretariat.length > 0 && (
           <section
@@ -81,13 +104,22 @@ export function CandidatePage() {
                   rel="noopener noreferrer"
                   className={styles.socialLink}
                 >
+                  <SocialIcon url={link.url} />
                   {link.label}
-                  <IconExternal size={18} />
+                  <span className="visually-hidden"> (נפתח בכרטיסייה חדשה)</span>
                 </a>
               </li>
             ))}
           </ul>
         )}
+
+        {/* חזרה לרשימת כל המועמדים בעמוד הבית */}
+        <nav className={styles.backNav} aria-label="ניווט בין מועמדים">
+          <LinkButton to="/" variant="secondary">
+            לכל המועמדים והמועמדות
+            <IconArrowForward size={20} />
+          </LinkButton>
+        </nav>
       </div>
     </article>
   )

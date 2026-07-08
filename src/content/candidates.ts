@@ -48,53 +48,6 @@ import type { Candidate } from './types'
  */
 export const candidates: Candidate[] = [
   {
-    id: 'shimon-peres',
-    slug: 'shimon-peres',
-    fullName: 'שמעון פרס',
-    image: 'shimon-peres.jpg',
-    imageAlt:
-      'שמעון פרס בחליפה כהה ועניבה כחולה, יושב כשידיו שלובות ומאחוריו דגל ישראל ומדפי ספרים',
-    mainStatement: 'אנשים שאין להם פנטזיה — לא עושים דברים פנטסטיים',
-    personalText: [
-      'שמעון פרס היה פוליטיקאי ומדינאי ישראלי שכיהן כראש ממשלת ישראל בין השנים 1984 ל־1986, בין השנים 1995 ל־1996 וכנשיא ישראל בין השנים 2007 ל־2014. הוא היה חבר ב־12 ממשלות וייצג חמש מפלגות פוליטיות בקריירה פוליטית שנמשכה 70 שנה.',
-    ],
-    proposedSecretariat: [
-      { name: 'יצחק רבין', role: 'סגן יו״ר' },
-      { name: 'יגאל אלון', role: 'יועץ חוקתי' },
-      { name: 'ישראל גלילי', role: 'דובר' },
-      { name: 'יצחק בן־אהרן', role: 'רכז שטח' },
-    ],
-    socialLinks: [
-      {
-        label: 'עמוד הפייסבוק של שמעון פרס',
-        url: 'https://www.facebook.com/ShimonPeresInt/?locale=he_IL',
-      },
-    ],
-  },
-  {
-    id: 'yitzhak-rabin',
-    slug: 'yitzhak-rabin',
-    fullName: 'יצחק רבין',
-    image: 'yitzhak-rabin.webp',
-    imageAlt: 'יצחק רבין בחליפה כהה ועניבה, על רקע ספרייה',
-    mainStatement: 'אלימות היא כרסום יסוד הדמוקרטיה הישראלית',
-    personalText: [
-      'יצחק רבין היה פוליטיקאי ואיש צבא ישראלי שכיהן כרמטכ"ל השביעי של צה"ל, כראש ממשלת ישראל החמישי של ממשלת ישראל השבע עשרה והעשרים וחמש וכשר הביטחון העשירי. חתן פרס נובל לשלום.',
-    ],
-    proposedSecretariat: [
-      { name: 'שמעון פרס', role: 'סגן' },
-      { name: 'שמעון שבס', role: 'יועץ חוקתי' },
-      { name: 'אורי סביר', role: 'דובר' },
-      { name: 'יגאל אלון', role: 'רכז שטח' },
-    ],
-    socialLinks: [
-      {
-        label: 'הרשת החברתית של יצחק רבין',
-        url: 'https://www.facebook.com/rabincenter/mentions/',
-      },
-    ],
-  },
-  {
     id: 'alon-de-leon',
     slug: 'alon-de-leon',
     fullName: 'אלון דה לאון',
@@ -112,6 +65,24 @@ export const candidates: Candidate[] = [
       {
         label: 'הטוויטר של אלון',
         url: 'https://x.com/AlonDeleonn',
+      },
+    ],
+  },
+  {
+    id: 'shali-alroy',
+    slug: 'shali-alroy',
+    fullName: 'שילי אלרועי',
+    image: 'shali-alroy.jpg',
+    mainStatement: 'העתיד לא קורה מעצמו, אנחנו מעצבים אותו.',
+    personalText: [
+      'שמי שילי אלרועי, אני בת 18 מראש העין ועולה לכיתה י"ב.',
+      'הצטרפתי לתנועה עוד כשהייתה נוער העבודה, ובבחירות הקודמות התמודדתי על תפקיד יו"רית הנוער.',
+      'בשנים האחרונות לקחתי חלק אינטנסיבי במחאות בשטח, ובזמני הפנוי אני אוהבת להתעסק באקטואליה.',
+    ],
+    socialLinks: [
+      {
+        label: 'האינסטגרם של שילי',
+        url: 'https://www.instagram.com/shai_lee_alroy?igsh=MWtjNWIxbnRpb2M4cw==',
       },
     ],
   },
