@@ -37,7 +37,6 @@ export const committee: CommitteeGroup[] = [
   {
     roleTitle: 'מלווים בוגרים',
     members: [
-      { name: 'תמר אנקרי', role: 'מלווה בוגרת' },
       { name: 'עומר בן גרא', role: 'מלווה בוגר' },
       { name: 'ליאור ליוברסקי', role: 'מלווה בוגר' },
       { name: 'מתניה מליק', role: 'מלווה בוגר' },
