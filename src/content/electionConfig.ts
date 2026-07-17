@@ -23,13 +23,13 @@ export const electionConfig: ElectionConfig = {
   candidacyCloseTime: '22:00',
   registryCloseDate: '2026-07-15',
   registryCloseTime: '22:00',
-  debateDate: '2026-07-18',
-  debateTime: '22:00',
+  debateDate: '2026-07-19',
+  debateTime: '16:00',
 
   // יום הבחירות ושעות ההצבעה (לוח הזמנים המלא: src/content/infoSections.ts)
-  electionDate: '2026-07-22',
+  electionDate: '2026-07-20',
   votingStartTime: '10:00',
-  votingEndTime: '22:00',
+  votingEndTime: '20:00',
 
   // כיתובי ביניים — יוחלפו בטקסטים הסופיים בהמשך.
   eligibilityText: 'זכאי להצביע כל חברה או חבר בנוער הדמוקרטים בעל ותק של חודש לפחות בתנועה.',
