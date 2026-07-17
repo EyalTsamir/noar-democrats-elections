@@ -22,8 +22,8 @@ const boundaries = getElectionBoundaries(electionConfig)
 const cc = il('2026-07-10T22:00') // סגירת הגשת המועמדות
 const rc = il('2026-07-15T22:00') // סגירת ספר המצביעים
 const db = il('2026-07-18T22:00') // עימות המועמדים
-const vo = il('2026-07-22T10:00') // פתיחת ההצבעה
-const vc = il('2026-07-22T22:00') // סגירת ההצבעה
+const vo = il('2026-07-20T10:00') // פתיחת ההצבעה
+const vc = il('2026-07-20T20:00') // סגירת ההצבעה
 
 afterEach(() => {
   // מאפסים אזור ברירת מחדל אם נבדק שינוי שלו
@@ -103,7 +103,7 @@ describe('getElectionPhase — גבולות מדויקים', () => {
   })
 
   it('בין העימות לפתיחת ההצבעה → before-voting', () => {
-    expect(getElectionPhase(il('2026-07-20T12:00'), boundaries).id).toBe('before-voting')
+    expect(getElectionPhase(il('2026-07-19T12:00'), boundaries).id).toBe('before-voting')
   })
 
   it('שנייה לפני פתיחת ההצבעה → before-voting', () => {
@@ -117,7 +117,7 @@ describe('getElectionPhase — גבולות מדויקים', () => {
   })
 
   it('במהלך ההצבעה → voting-open', () => {
-    expect(getElectionPhase(il('2026-07-22T15:00'), boundaries).id).toBe('voting-open')
+    expect(getElectionPhase(il('2026-07-20T15:00'), boundaries).id).toBe('voting-open')
   })
 
   it('שנייה לפני סגירת ההצבעה → voting-open', () => {
@@ -152,7 +152,7 @@ describe('getElectionPhase — עמידות לאזור זמן שאינו ישר�
     Settings.defaultZone = 'America/New_York'
     const local = getElectionBoundaries(electionConfig)
     expect(local.votingOpen.offset).toBe(180) // עדיין נבנה עם zone מפורש
-    expect(getElectionPhase(il('2026-07-22T15:00'), local).id).toBe('voting-open')
+    expect(getElectionPhase(il('2026-07-20T15:00'), local).id).toBe('voting-open')
   })
 })
 
@@ -197,7 +197,7 @@ describe('parseSimulatedClock', () => {
   it('null → null', () => expect(parseSimulatedClock(null, electionConfig)).toBeNull())
   it('ריק → null', () => expect(parseSimulatedClock('', electionConfig)).toBeNull())
   it('ISO תקין → DateTime תקין בשעון ישראל', () => {
-    const dt = parseSimulatedClock('2026-07-22T09:59:59', electionConfig)
+    const dt = parseSimulatedClock('2026-07-20T09:59:59', electionConfig)
     expect(dt?.isValid).toBe(true)
     expect(dt?.offset).toBe(180)
   })
