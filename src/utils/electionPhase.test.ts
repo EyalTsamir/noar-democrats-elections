@@ -21,7 +21,7 @@ function il(iso: string): DateTime {
 const boundaries = getElectionBoundaries(electionConfig)
 const cc = il('2026-07-10T22:00') // סגירת הגשת המועמדות
 const rc = il('2026-07-15T22:00') // סגירת ספר המצביעים
-const db = il('2026-07-18T22:00') // עימות המועמדים
+const db = il('2026-07-19T16:00') // עימות המועמדים
 const vo = il('2026-07-20T10:00') // פתיחת ההצבעה
 const vc = il('2026-07-20T20:00') // סגירת ההצבעה
 
@@ -103,7 +103,7 @@ describe('getElectionPhase — גבולות מדויקים', () => {
   })
 
   it('בין העימות לפתיחת ההצבעה → before-voting', () => {
-    expect(getElectionPhase(il('2026-07-19T12:00'), boundaries).id).toBe('before-voting')
+    expect(getElectionPhase(il('2026-07-19T18:00'), boundaries).id).toBe('before-voting')
   })
 
   it('שנייה לפני פתיחת ההצבעה → before-voting', () => {
