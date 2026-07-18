@@ -20,7 +20,7 @@ export const infoSections: InfoSection[] = [
     events: [
       { date: '10.7.2026', time: '22:00', title: 'סגירת הגשת המועמדות' },
       { date: '15.7.2026', time: '22:00', title: 'סגירת ספר המצביעים' },
-      { date: '18.7.2026', time: '22:00', title: 'עימות המועמדים' },
+      { date: '19.7.2026', time: '16:00', title: 'עימות המועמדים' },
       { date: '22.7.2026', time: '10:00–22:00', title: 'ההצבעה' },
     ],
   },
